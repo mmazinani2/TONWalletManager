@@ -34,3 +34,8 @@ Contributions are welcome! Please open an issue or submit a pull request.
 ## Acknowledgements
 tonutils-go: A Go library for interacting with the TON blockchain.
 
+## This is my TON address: 
+
+``` UQC6314CqvFzKo1hCWI3glBIAx0J1gWVoYVPzp_KD6BXJqqO. 
+
+If you appreciate my work and would like to support me, I would be very grateful for your generosity. Thank you!
