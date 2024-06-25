@@ -1,0 +1,4 @@
+seed=banana edge blade catalog canoe wave beef about crime success april gas cancel float crew raise search online icon half tank require fat debris
+wallet_address=UQAmBkJqsHX353tJztXHLSlqU20QOcwKxcmwvMPnsuoS1-Zl
+comment=testdd
+folder_path=wallets
