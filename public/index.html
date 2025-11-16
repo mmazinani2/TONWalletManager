@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Wallet Manager</title>
+    <style>
+        body { font-family: sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .hidden { display: none; }
+        .output { white-space: pre-wrap; background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TON Wallet Manager</h1>
+
+        <h2>Create New Wallet</h2>
+        <button id="create-wallet-btn">Create Wallet</button>
+        <div id="create-wallet-output" class="output hidden"></div>
+
+        <h2>Check Wallet Balance</h2>
+        <button id="check-balance-btn">Check Balance</button>
+        <div id="check-balance-output" class="output hidden"></div>
+
+        <h2>Send Transactions</h2>
+        <form id="send-tx-form">
+            <label for="receivers">Receivers (address amount):</label><br>
+            <textarea id="receivers" name="receivers" rows="4" cols="50"></textarea><br>
+            <label for="comment">Comment:</label><br>
+            <input type="text" id="comment" name="comment"><br><br>
+            <button type="submit">Send Transactions</button>
+        </form>
+        <div id="send-tx-output" class="output hidden"></div>
+    </div>
+
+    <script>
+        const createWalletBtn = document.getElementById('create-wallet-btn');
+        const createWalletOutput = document.getElementById('create-wallet-output');
+        const checkBalanceBtn = document.getElementById('check-balance-btn');
+        const checkBalanceOutput = document.getElementById('check-balance-output');
+        const sendTxForm = document.getElementById('send-tx-form');
+        const sendTxOutput = document.getElementById('send-tx-output');
+
+        createWalletBtn.addEventListener('click', async () => {
+            const response = await fetch('/create-wallet', { method: 'POST' });
+            const data = await response.json();
+            createWalletOutput.textContent = `Seed Phrase: ${data.seedPhrase}\nWallet Address: ${data.walletAddress}`;
+            createWalletOutput.classList.remove('hidden');
+        });
+
+        checkBalanceBtn.addEventListener('click', async () => {
+            const response = await fetch('/check-balance', { method: 'POST' });
+            const data = await response.json();
+            checkBalanceOutput.textContent = `Balance: ${data.balance}\nWallet Address: ${data.walletAddress}`;
+            checkBalanceOutput.classList.remove('hidden');
+        });
+
+        sendTxForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const receivers = document.getElementById('receivers').value.split('\n').map(line => {
+                const [address, amount] = line.split(' ');
+                return { address, amount };
+            });
+            const comment = document.getElementById('comment').value;
+
+            const response = await fetch('/send-transactions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ receivers, comment })
+            });
+
+            const data = await response.json();
+            sendTxOutput.textContent = `Transaction Hash: ${data.transactionHash}`;
+            sendTxOutput.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "This Go script provides a comprehensive solution for managing TON (The Open Network) wallets. It includes functionalities for creating new wallets, checking balances, deploying contracts, and automating the sending of transactions from a receiver file. The script leverages the tonutils-go library to interact with the TON blockchain.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmazinani2/TONWalletManager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mmazinani2/TONWalletManager/issues"
+  },
+  "homepage": "https://github.com/mmazinani2/TONWalletManager#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0"
+  }
+}
